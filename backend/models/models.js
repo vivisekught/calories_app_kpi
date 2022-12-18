@@ -32,11 +32,11 @@ const Lifestyle = sequelize.define('lifestyle',{
     coefficient: {type: DataTypes.DOUBLE},
 })
 
-const Activity_history = sequelize.define('activity_history',{
+const Activities_history = sequelize.define('activities_history',{
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
-const Activity_per_day = sequelize.define('activity_per_day',{
+const Activities_per_day = sequelize.define('activities_per_day',{
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     date: {type: DataTypes.DATE, allowNull: false},
     number_of_calories: {type: DataTypes.INTEGER},
@@ -60,9 +60,6 @@ const Calories_per_day = sequelize.define('calories_per_day',{
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     date: {type: DataTypes.DATE, allowNull: false},
     number_of_calories: {type: DataTypes.INTEGER},
-    // breakfast_meal_id: {type: DataTypes.INTEGER, unique: true},
-    // lunch_meal_id: {type: DataTypes.INTEGER, unique: true},
-    // dinner_meal_id: {type: DataTypes.INTEGER, unique: true},
 })
 
 const Meal = sequelize.define('meal',{
@@ -81,17 +78,17 @@ User_body_data.belongsTo(User)
 User_body_data.hasMany(Lifestyle)
 Lifestyle.belongsTo(User_body_data)
 
-User.hasOne(Activity_history)
-Activity_history.belongsTo(User)
+User.hasOne(Activities_history)
+Activities_history.belongsTo(User)
 
 User.hasOne(Calories_history)
 Calories_history.belongsTo(User)
 
-Activity_history.hasMany(Activity_per_day)
-Activity_per_day.belongsTo(Activity_history)
+Activities_history.hasMany(Activities_per_day)
+Activities_per_day.belongsTo(Activities_history)
 
-Activity_per_day.hasMany(Activity)
-Activity.belongsTo(Activity_per_day)
+Activities_per_day.hasMany(Activity)
+Activity.belongsTo(Activities_per_day)
 
 Calories_per_day.hasMany(Meal)
 Meal.belongsTo(Calories_per_day)
